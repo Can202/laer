@@ -3,6 +3,11 @@
 EXECFILE="$HOME/.config/laer/command"
 DEFAULTEDITOR="$HOME/.config/laer/defaulteditor"
 
+if [ ! -d "/etc/laer" ]
+then
+	mkdir /etc/laer
+fi
+
 if [ ! -f $EXECFILE ]
 then
     mkdir $HOME/.config
@@ -145,7 +150,6 @@ laer [Command]
 					echo "Enter to continue"
 					read continue
 					
-					mkdir /etc/laer
 					echo "$2" > /etc/laer/linked
 					
 					ln /usr/bin/laer /usr/bin/$2
@@ -166,6 +170,18 @@ laer [Command]
 		Use:
 		--add-link [link]
 			"
+		fi
+    fi
+    if [ $1 = "--rm-link" ]
+    then
+		if [ $(whoami) = "root" ]
+		then
+			echo "Enter to continue"
+			read continue
+			rm -f /bin/$(cat /etc/laer/linked)
+			rm -f /etc/laer/linked
+		else
+			echo "you need root to remove"
 		fi
     fi
     exit
