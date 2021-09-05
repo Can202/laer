@@ -10,7 +10,6 @@ then
     touch $EXECFILE
     echo "
 #!/bin/sh
-clear
 neofetch
     " > $EXECFILE
     chmod a+x $EXECFILE
@@ -111,5 +110,5 @@ laer [Command]
 fi
 
 
-
+clear
 $EXECFILE
