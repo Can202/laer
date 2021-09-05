@@ -52,6 +52,10 @@ laer [Command]
         -r editor       Reset just editor
         -r config       Reset just config
         -r all          Reset All
+        
+    --add-link				add a link to laer
+		Use:
+		--add-link [link]
 "
     fi
     if [ $1 = "--version" ] || [ $1 = "-v" ]
@@ -107,7 +111,63 @@ laer [Command]
             "
         fi
     fi
-    if []
+    if [ $1 = "--add-link" ]
+    then
+		if [ ! -z "$2" ]
+		then
+		
+			if [ -f "/usr/bin/$2" ] || [ -f "/usr/sbin/$2" ]
+			then
+				echo "$2 is used"
+				exit
+			fi
+			if [ -f "/etc/laer/linked" ]
+			then
+				echo "$(cat /etc/laer/linked) is linked. You cannot link $2."
+				exit
+			fi
+			echo "Important"
+			echo "Are you sure that you want to link laer to $2?"
+			echo "This action remove the command $2, if this command exist"
+			echo "if you are sure that $2 doesn't exist"
+			echo "you can continue"
+			echo
+			echo
+			echo "Are you Sure? (y/n)"
+			read addlink
+			if [ $addlink = "y" ] || [ $addlink = "Y" ]
+			then
+				echo "Ok!"
+				if [ $(whoami) = "root" ]
+				then
+					echo "Perfect! You're root"
+					
+					echo "Enter to continue"
+					read continue
+					
+					mkdir /etc/laer
+					echo "$2" > /etc/laer/linked
+					
+					ln /usr/bin/laer /usr/bin/$2
+					
+					echo "laer is now linked to $2" 
+					
+				else
+					echo
+					echo "You have to run this as root"
+				fi
+			else
+				echo "Aborting"
+				exit
+			fi
+		else
+			echo "
+    --add-link				add a link to laer
+		Use:
+		--add-link [link]
+			"
+		fi
+    fi
     exit
 fi
 
