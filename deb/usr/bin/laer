@@ -3,10 +3,6 @@
 EXECFILE="$HOME/.config/laer/command"
 DEFAULTEDITOR="$HOME/.config/laer/defaulteditor"
 
-if [ ! -d "/etc/laer" ]
-then
-	mkdir /etc/laer
-fi
 
 if [ ! -f $EXECFILE ]
 then

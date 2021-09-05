@@ -49,6 +49,8 @@ then
 	fi
 fi
 
+$SUDO mkdir /etc/laer
+
 cd /tmp
 
 $SUDO rm -rf laer
