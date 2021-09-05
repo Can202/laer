@@ -1,2 +1,3 @@
 vim
 bash
+neofetch
