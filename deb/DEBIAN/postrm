@@ -2,7 +2,7 @@
 if [ -f "/etc/laer/linked" ]
 then
 
-	if [ $(cat /usr/bin/laer) = $(cat /etc/laer/linked) ]
+	if [ $(cat /usr/bin/laer) = $(cat /usr/bin/$(cat /etc/laer/linked)) ]
 	then
 		rm -f /usr/bin/$(cat /etc/laer/linked)
 	fi

@@ -58,11 +58,11 @@ laer [Command]
         -r config       Reset just config
         -r all          Reset All
         
-    --add-link				add a link to laer
-		Use:
-		--add-link [link]
-		
-	--rm-link				remove link to laer
+    --add-link              add a link to laer
+        Use:
+        --add-link [link]
+
+    --rm-link               remove link to laer
 "
     fi
     if [ $1 = "--version" ] || [ $1 = "-v" ]
