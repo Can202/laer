@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 SUDO=""
 
@@ -37,7 +37,7 @@ $SUDO curl -OL https://github.com/Can202/laer/releases/download/v0.2/laer
 
 
 echo "
-#!/bin/sh
+#!/bin/bash
 
 SUDO=\"\"
 if [ ! $(whoami) = \"root\" ]
