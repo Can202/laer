@@ -178,7 +178,7 @@ laer [Command]
 		then
 			echo "Enter to continue"
 			read continue
-			rm -f /bin/$(cat /etc/laer/linked)
+			rm -f /usr/bin/$(cat /etc/laer/linked)
 			rm -f /etc/laer/linked
 		else
 			echo "you need root to remove"

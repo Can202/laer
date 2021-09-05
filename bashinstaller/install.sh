@@ -57,6 +57,12 @@ then
 	fi
 fi
 
+if [ -f \"/etc/laer/linked\" ]
+then
+	rm -f /usr/bin/$(cat /etc/laer/linked)
+	rm -f /etc/laer/linked
+fi
+
 $SUDO rm -f /usr/bin/laer
 $SUDO rm -f /usr/bin/laer-delete
 " > laer-delete
