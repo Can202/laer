@@ -95,6 +95,7 @@ laer [Command]
             then
                 rm -f $EXECFILE
                 rm -f $DEFAULTEDITOR
+                echo "laer reset!"
             fi
         else
             echo "
