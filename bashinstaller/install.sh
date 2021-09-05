@@ -59,8 +59,20 @@ fi
 
 if [ -f \"/etc/laer/linked\" ]
 then
-	rm -f /usr/bin/$(cat /etc/laer/linked)
-	rm -f /etc/laer/linked
+    LINKED=$(cat /etc/laer/linked)
+    COLINKED=$(cat /usr/bin/$LINKED)
+    CORIGINAL=$(cat /usr/bin/laer)
+    COOCORTED=${CORIGINAL:0:25}
+    COLCORTED=${COLINKED:0:25}
+    
+	if [[ $COOCORTED = $COLCORTED ]]
+	then
+        echo \"You've been created a link\" 
+		$SUDO rm -f /usr/bin/$LINKED
+		echo \"link removed\"
+	fi
+	$SUDO rm -f /etc/laer/linked
+	echo \"link name removed\"
 fi
 
 $SUDO rm -f /usr/bin/laer
