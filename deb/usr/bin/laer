@@ -3,6 +3,11 @@
 EXECFILE="$HOME/.config/laer/command"
 DEFAULTEDITOR="$HOME/.config/laer/defaulteditor"
 
+if [ ! -d "/etc/laer" ]
+then
+	mkdir /etc/laer
+fi
+
 if [ ! -f $EXECFILE ]
 then
     mkdir $HOME/.config
@@ -42,7 +47,7 @@ laer [Command]
     
     --edit or -e            Edit Config File
     
-    --changeeditor or -ce   Change Editor
+    --change-editor or -ce   Change Editor
         Use:
         -ce [Editor]    Change to This Editor
         -ce             Ask you the Editor
@@ -52,11 +57,15 @@ laer [Command]
         -r editor       Reset just editor
         -r config       Reset just config
         -r all          Reset All
+        
+    --add-link				add a link to laer
+		Use:
+		--add-link [link]
 "
     fi
     if [ $1 = "--version" ] || [ $1 = "-v" ]
     then
-        echo "v0.1"
+        echo "v0.2"
     fi
     if [ $1 = "--config" ] || [ $1 = "-c" ]
     then
@@ -66,7 +75,7 @@ laer [Command]
     then
         $DEFAULTEDITORCOMMAND $EXECFILE
     fi
-    if [ $1 = "--changeeditor" ] || [ $1 = "-ce" ]
+    if [ $1 = "--change-editor" ] || [ $1 = "-ce" ]
     then
         if [ ! -z "$2" ]
         then
@@ -106,6 +115,74 @@ laer [Command]
         -r all          Reset All
             "
         fi
+    fi
+    if [ $1 = "--add-link" ]
+    then
+		if [ ! -z "$2" ]
+		then
+		
+			if [ -f "/usr/bin/$2" ] || [ -f "/usr/sbin/$2" ]
+			then
+				echo "$2 is used"
+				exit
+			fi
+			if [ -f "/etc/laer/linked" ]
+			then
+				echo "$(cat /etc/laer/linked) is linked. You cannot link $2."
+				exit
+			fi
+			echo "Important"
+			echo "Are you sure that you want to link laer to $2?"
+			echo "This action remove the command $2, if this command exist"
+			echo "if you are sure that $2 doesn't exist"
+			echo "you can continue"
+			echo
+			echo
+			echo "Are you Sure? (y/n)"
+			read addlink
+			if [ $addlink = "y" ] || [ $addlink = "Y" ]
+			then
+				echo "Ok!"
+				if [ $(whoami) = "root" ]
+				then
+					echo "Perfect! You're root"
+					
+					echo "Enter to continue"
+					read continue
+					
+					echo "$2" > /etc/laer/linked
+					
+					ln /usr/bin/laer /usr/bin/$2
+					
+					echo "laer is now linked to $2" 
+					
+				else
+					echo
+					echo "You have to run this as root"
+				fi
+			else
+				echo "Aborting"
+				exit
+			fi
+		else
+			echo "
+    --add-link				add a link to laer
+		Use:
+		--add-link [link]
+			"
+		fi
+    fi
+    if [ $1 = "--rm-link" ]
+    then
+		if [ $(whoami) = "root" ]
+		then
+			echo "Enter to continue"
+			read continue
+			rm -f /usr/bin/$(cat /etc/laer/linked)
+			rm -f /etc/laer/linked
+		else
+			echo "you need root to remove"
+		fi
     fi
     exit
 fi

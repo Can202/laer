@@ -32,7 +32,7 @@ mkdir laer
 
 cd laer
 
-$SUDO curl -OL https://github.com/Can202/laer/releases/download/v0.1/laer
+$SUDO curl -OL https://github.com/Can202/laer/releases/download/v0.2/laer
 
 
 
