@@ -7,6 +7,9 @@ then
 	echo "laer is installed"
 	exit
 fi
+echo
+echo "Internet Required"
+echo
 if [ ! $(whoami) = "root" ]
 then
 	echo "you have to run this script as root"
