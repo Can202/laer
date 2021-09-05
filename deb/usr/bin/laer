@@ -1,0 +1,115 @@
+#!/bin/sh
+
+EXECFILE="$HOME/.config/laer/command"
+DEFAULTEDITOR="$HOME/.config/laer/defaulteditor"
+
+if [ ! -f $EXECFILE ]
+then
+    mkdir $HOME/.config
+    mkdir $HOME/.config/laer
+    touch $EXECFILE
+    echo "
+#!/bin/sh
+neofetch
+    " > $EXECFILE
+    chmod a+x $EXECFILE
+    clear
+fi
+
+if [ ! -f $DEFAULTEDITOR ]
+then
+    touch $DEFAULTEDITOR
+    echo "vim" > $DEFAULTEDITOR
+fi
+
+DEFAULTEDITORCOMMAND=$(cat $DEFAULTEDITOR)
+
+if [ ! -z "$1" ]
+then
+    if [ $1 = "--help" ] || [ $1 = "-h" ]
+    then
+        echo "clear command but personalized!!!
+you can configurate this command to personalize
+
+Commands:
+laer [Command]
+
+    --help or -h            Help
+    
+    --version or -v         See Version
+    
+    --config or -c          Read Config file
+    
+    --edit or -e            Edit Config File
+    
+    --changeeditor or -ce   Change Editor
+        Use:
+        -ce [Editor]    Change to This Editor
+        -ce             Ask you the Editor
+        
+    --reset or -r           Reset to Default
+        Use:
+        -r editor       Reset just editor
+        -r config       Reset just config
+        -r all          Reset All
+"
+    fi
+    if [ $1 = "--version" ] || [ $1 = "-v" ]
+    then
+        echo "0.1-dev"
+    fi
+    if [ $1 = "--config" ] || [ $1 = "-c" ]
+    then
+        cat $EXECFILE
+    fi
+    if [ $1 = "--edit" ] || [ $1 = "-e" ]
+    then
+        $DEFAULTEDITORCOMMAND $EXECFILE
+    fi
+    if [ $1 = "--changeeditor" ] || [ $1 = "-ce" ]
+    then
+        if [ ! -z "$2" ]
+        then
+            echo "$2" > $DEFAULTEDITOR
+        else
+            echo "What editor you want use"
+            read editortemp
+            echo "$editortemp" > $DEFAULTEDITOR
+        fi
+    fi
+    if [ $1 = "--reset" ] || [ $1 = "-r" ]
+    then
+        if [ ! -z "$2" ]
+        then
+            if [ $2 = "editor" ]
+            then
+                rm -f $DEFAULTEDITOR
+                echo "editor reset!"
+            fi
+            if [ $2 = "config" ]
+            then
+                rm -f $EXECFILE
+                echo "config reset!"
+            fi
+            if [ $2 = "all" ]
+            then
+                rm -f $EXECFILE
+                rm -f $DEFAULTEDITOR
+                echo "laer reset!"
+            fi
+        else
+            echo "
+    --reset or -r           Reset to Default
+        Use:
+        -r editor       Reset just editor
+        -r config       Reset just config
+        -r all          Reset All
+            "
+        fi
+    fi
+    exit
+fi
+
+
+clear
+$EXECFILE

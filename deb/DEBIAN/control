@@ -1,0 +1,8 @@
+Package: laer
+Priority: optional
+Maintainer: Can202 <mgoopazo@gmail.com>
+Architecture: all
+Version: 0.1
+Depends: vim, bash, neofetch
+Description: clear command, but personalized
+ clear command, but personalized
