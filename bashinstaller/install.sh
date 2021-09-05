@@ -2,6 +2,28 @@
 
 SUDO=""
 
+if [ -f "/usr/bin/vim" ] || [ -f "/usr/sbin/vim" ]
+then
+    echo "vim installed"
+else
+    echo "you need to install vim"
+    exit
+fi
+if [ -f "/usr/bin/bash" ] || [ -f "/usr/sbin/bash" ]
+then
+    echo "bash installed"
+else
+    echo "you need to install bash"
+    exit
+fi
+if [ -f "/usr/bin/neofetch" ] || [ -f "/usr/sbin/neofetch" ]
+then
+    echo "neofetch installed"
+else
+    echo "you need to install neofetch"
+    exit
+fi
+
 if [ -f "/usr/bin/laer" ]
 then
 	echo "laer is installed"
