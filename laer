@@ -148,6 +148,11 @@ laer [Command]
 					echo "Enter to continue"
 					read continue
 					
+					if [ ! -d "/etc/laer/" ]
+					then
+                        mkdir /etc/laer/
+					fi
+					
 					echo "$2" > /etc/laer/linked
 					
 					ln /usr/bin/laer /usr/bin/$2
