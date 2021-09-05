@@ -56,7 +56,7 @@ laer [Command]
     fi
     if [ $1 = "--version" ] || [ $1 = "-v" ]
     then
-        echo "0.1-dev"
+        echo "v0.1"
     fi
     if [ $1 = "--config" ] || [ $1 = "-c" ]
     then
