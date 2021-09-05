@@ -42,7 +42,7 @@ laer [Command]
     
     --edit or -e            Edit Config File
     
-    --changeeditor or -ce   Change Editor
+    --change-editor or -ce   Change Editor
         Use:
         -ce [Editor]    Change to This Editor
         -ce             Ask you the Editor
@@ -66,7 +66,7 @@ laer [Command]
     then
         $DEFAULTEDITORCOMMAND $EXECFILE
     fi
-    if [ $1 = "--changeeditor" ] || [ $1 = "-ce" ]
+    if [ $1 = "--change-editor" ] || [ $1 = "-ce" ]
     then
         if [ ! -z "$2" ]
         then
@@ -107,6 +107,7 @@ laer [Command]
             "
         fi
     fi
+    if []
     exit
 fi
 
