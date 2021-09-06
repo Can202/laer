@@ -1,7 +1,7 @@
 # Laer - clear command but personalized
 laer is a simple command, to clear the terminal with style
 
-## Screenshots
+
 
 # How to use
 
